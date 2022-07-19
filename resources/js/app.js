@@ -21,7 +21,17 @@ InertiaProgress.init()
 /* Vue.component('inertia-link', Link) */
 
 createInertiaApp({
-    resolve: name => require(`./Pages/${name}`),
+    /* resolve: name => require(`./Pages/${name}`), */
+    /* Ou assim, fazendo um "code splitting" ("import()"=importação dinâmica)
+       para melhorar o "bundle size"(tamanho do bundle) porque, normalmente,
+       todos os componentes são carregados simultâneamente, só faltando
+       serem renderizados pelo inertia.
+       O "code splitting" (divisão de código) divide as várias páginas do
+       seu aplicativo em pacotes menores, que são carregados sob demanda ao
+       visitar novas páginas. Isso pode reduzir significativamente o tamanho
+       do pacote JavaScript inicial, melhorando o tempo de renderização pela
+       primeira vez */
+    resolve: name => import(`./Pages/${name}`),
     setup({
         el,
         App,

@@ -1,7 +1,9 @@
 <?php
 
 use Inertia\Inertia;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+/* use Illuminate\Support\Facades\Request; */
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +23,17 @@ Route::get('/', function () {
 Route::get('/login', function () {
     return Inertia::render('Login');
 });
+
+Route::post('/login', function (Request $request) {
+    $request->validate([
+        'email' => ['required', 'email'],
+        'password' => ['required']
+    ]);
+/* Após dar certo a validação e a autenticação do usuário */
+return redirect('/dashboard');
+});
+
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+});
+

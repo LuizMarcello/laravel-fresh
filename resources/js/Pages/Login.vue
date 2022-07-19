@@ -19,32 +19,39 @@
           </a>
         </p>
       </div>
-      <form class="mt-8 space-y-6" action="#" method="POST">
+      <form
+        @submit.prevent="form.post('/login')"
+        class="mt-8 space-y-6"
+        action="#"
+        method="POST"
+      >
         <input type="hidden" name="remember" value="true" />
         <div class="rounded-md shadow-sm -space-y-px">
           <div>
             <label for="email-address" class="sr-only">Email address</label>
             <input
+              v-model="form.email"
               id="email-address"
               name="email"
-              type="email"
+              type="text"
               autocomplete="email"
-              required
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Email address"
             />
+            <span class="red-text-500" v-if="errors.email">{{ errors.email }}</span>
           </div>
           <div>
             <label for="password" class="sr-only">Password</label>
             <input
+              v-model="form.password"
               id="password"
               name="password"
               type="password"
               autocomplete="current-password"
-              required
               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Password"
             />
+            <span class="red-text-500" v-if="errors.password">{{ errors.password }}</span>
           </div>
         </div>
 
@@ -98,7 +105,20 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    errors: Object,
+  },
+  data() {
+    return {
+      /* Usando um helper do inertia */
+      form: this.$inertia.form({
+        email: null,
+        password: null,
+      }),
+    };
+  },
+};
 </script>
 
 <style></style>
