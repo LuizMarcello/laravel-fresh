@@ -27,7 +27,7 @@ createInertiaApp({
        todos os componentes são carregados simultâneamente, só faltando
        serem renderizados pelo inertia.
        O "code splitting" (divisão de código) divide as várias páginas do
-       seu aplicativo em pacotes menores, que são carregados sob demanda ao
+       aplicativo em pacotes menores, que são carregados sob demanda ao
        visitar novas páginas. Isso pode reduzir significativamente o tamanho
        do pacote JavaScript inicial, melhorando o tempo de renderização pela
        primeira vez */
